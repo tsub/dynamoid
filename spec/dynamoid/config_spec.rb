@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe Dynamoid::Config do
   describe 'credentials' do
+    before do
+      Dynamoid.adapter.connect!  # clear cached client
+    end
+    after do
+      Dynamoid.adapter.connect!  # clear cached client
+    end
+
     it 'passes credentials to a client connection', config: {
       credentials: Aws::Credentials.new('your_access_key_id', 'your_secret_access_key')
     } do
